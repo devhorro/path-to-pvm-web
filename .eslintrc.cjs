@@ -5,7 +5,9 @@ module.exports = {
   root: true,
   'extends': [
     'plugin:vue/vue3-essential',
-    'eslint:recommended',
+    'airbnb-base',
+    'plugin:prettier/recommended',
+    'prettier',
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
@@ -21,5 +23,17 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
-  }
+  },
+  rules: {
+    "max-len": ["error", { "code": 80 }]
+  },
+  'import/no-extraneous-dependencies': [
+    'error',
+    {
+      devDependencies: [
+        // Add a pattern to allow the @rushstack/eslint-patch package in devDependencies
+        '**/@rushstack/eslint-patch/**',
+      ],
+    },
+  ],
 }
