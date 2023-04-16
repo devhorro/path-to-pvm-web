@@ -1,0 +1,20 @@
+[
+  {
+    "pathId": 1,
+    "prevPathId": null,
+    "prevBosses": [],
+    "bosses": [
+      { "name": "Boss1", "image": "path/to/image1" },
+      { "name": "Boss2", "image": "path/to/image2" }
+    ]
+  },
+  {
+    "pathId": 2,
+    "prevPathId": 1,
+    "prevBosses": ["Boss1"],
+    "bosses": [
+      { "name": "Boss3", "image": "path/to/image3" },
+      { "name": "Boss4", "image": "path/to/image4" }
+    ]
+  }
+]

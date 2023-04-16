@@ -1,11 +1,9 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
-
 module.exports = {
   root: true,
   'extends': [
     'plugin:vue/vue3-essential',
-    'airbnb-base',
+    'airbnb',
     'plugin:prettier/recommended',
     'prettier',
     '@vue/eslint-config-typescript',
@@ -25,15 +23,8 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    "max-len": ["error", { "code": 80 }]
+    "max-len": ["error", { "code": 80 }],
+    "no-whitespace-before-property": "error",
+    "indent": ["error", 2]
   },
-  'import/no-extraneous-dependencies': [
-    'error',
-    {
-      devDependencies: [
-        // Add a pattern to allow the @rushstack/eslint-patch package in devDependencies
-        '**/@rushstack/eslint-patch/**',
-      ],
-    },
-  ],
 }

@@ -20,10 +20,10 @@
     </div>
   </template>
   
-  <script lang="ts">
-  import { defineComponent, onMounted, ref } from 'vue';
-  import { useRoute } from 'vue-router';
-  import axios from 'axios';
+<script lang="ts">
+import { defineComponent, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import axios from 'axios';
   
   interface EventData {
     eventName: string;
@@ -35,25 +35,25 @@
     endDate: string;
   }
   
-  export default defineComponent({
-    setup() {
-      const route = useRoute();
-      const eventData = ref<EventData>({
-        eventName: '',
-        paths: [],
-        startDate: '',
-        endDate: '',
-      });
-      const eventNotFound = ref(false);
+export default defineComponent({
+  setup() {
+    const route = useRoute();
+    const eventData = ref<EventData>({
+      eventName: '',
+      paths: [],
+      startDate: '',
+      endDate: '',
+    });
+    const eventNotFound = ref(false);
   
-      onMounted(async () => {
-        const { eventId } = route.params;
-        try {
-          // Fetch the event data from your API
-          const response = await axios.get(`http://localhost:3000/api/events/${eventId}`);
-          eventData.value = response.data;
-        } catch (error) {
-          eventNotFound.value = true;
+    onMounted(async () => {
+      const { eventId } = route.params;
+      try {
+        // Fetch the event data from your API
+        const response = await axios.get(`http://localhost:3000/api/events/${eventId}`);
+        eventData.value = response.data;
+      } catch (error) {
+        eventNotFound.value = true;
           type AxiosError = {
             response?: {
               status: number;
@@ -63,11 +63,11 @@
           if (axiosError.response && axiosError.response.status === 404) {
             eventNotFound.value = true;
           }
-        }
-      });
+      }
+    });
   
-      return { eventData, eventNotFound };
-    },
-  });
-  </script>
+    return { eventData, eventNotFound };
+  },
+});
+</script>
   
