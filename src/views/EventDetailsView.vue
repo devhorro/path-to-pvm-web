@@ -1,3 +1,4 @@
+<!-- EventDetailsView.vue -->
 <template>
     <div class="container mx-auto px-4">
       <h1 class="my-8 text-2xl">Event Details</h1>
@@ -10,6 +11,7 @@
           <p>Boss: {{ path.boss }}</p>
           <p>Kill Count Threshold: {{ path.killCount }}</p>
         </div>
+      <ParticipantsList :eventId="eventData.eventId" />
       </div>
       <div v-else-if="eventNotFound">
         <p>Sorry... this event could not be found.</p>
@@ -24,33 +26,37 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
-  
-  interface EventData {
-    eventName: string;
-    paths: {
-      boss: string;
-      killCount: number;
-    }[];
-    startDate: string;
-    endDate: string;
-  }
+import ParticipantsList from '../components/ParticipantsList.vue';
+import type { EventData } from '@/components/types';
+import { serverHostUrl } from '@/utils/constants';
   
 export default defineComponent({
+  components: {
+    ParticipantsList,
+  },
   setup() {
     const route = useRoute();
     const eventData = ref<EventData>({
+      eventId: '',
       eventName: '',
       paths: [],
       startDate: '',
       endDate: '',
     });
     const eventNotFound = ref(false);
+    const showParticipants = ref(false);
   
     onMounted(async () => {
       const { eventId } = route.params;
       try {
-        // Fetch the event data from your API
-        const response = await axios.get(`http://localhost:3000/api/events/${eventId}`);
+
+        const response = await axios.get(
+          `${serverHostUrl}/api/events/${eventId}`
+        );
+        if (!response.data) {
+          eventNotFound.value = true;
+          return;
+        }
         eventData.value = response.data;
       } catch (error) {
         eventNotFound.value = true;
@@ -66,7 +72,7 @@ export default defineComponent({
       }
     });
   
-    return { eventData, eventNotFound };
+    return { eventData, eventNotFound, showParticipants  };
   },
 });
 </script>

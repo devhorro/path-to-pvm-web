@@ -1,3 +1,14 @@
+export interface EventData {
+    eventId: string;
+    eventName: string;
+    paths: {
+        boss: string;
+        killCount: number;
+    }[];
+    startDate: string;
+    endDate: string;
+}
+
 export interface Boss {
     name: string;
     image: string;

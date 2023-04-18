@@ -5,12 +5,18 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
           <label class="block mb-2" for="eventName">Event Name:</label>
-          <input v-model="eventName" id="eventName" name="eventName" class="w-full border border-gray-300 rounded p-2"
+          <input v-model="eventName" 
+          id="eventName" 
+          name="eventName" 
+          class="w-full border border-gray-300 rounded p-2"
             required>
         </div>
         <div>
           <label class="block mb-2" for="startDate">Start Date:</label>
-          <input v-model="startDate" id="startDate" name="startDate" type="datetime-local"
+          <input v-model="startDate" 
+          id="startDate" 
+          name="startDate" 
+          type="datetime-local"
             class="w-full border border-gray-300 rounded p-2" required>
         </div>
         <div>
@@ -32,8 +38,8 @@
 
 <script lang="ts">
 import axios from 'axios';
-import bossPathsRaw from '@/assets/bosses.json';
-import BossPath from '@/components/BossPath.vue';
+import bossPathsRaw from '../assets/bosses.json';
+import BossPath from './BossPath.vue';
 import type { Boss, Path } from './types';
 
 const bossPaths: Path[] = bossPathsRaw;

@@ -200,4 +200,36 @@ app.post('/event/:eventId/participants', async (req, res) => {
   }
 });
 
+app.get('/participants/:eventId', async (req, res) => {
+  const { eventId } = req.params;
+  try { 
+    const participants = await Participant.find({ eventId });
+    if (!participants) {
+      res.status(404).json({ message: `Event not found for id: ${eventId}` });
+    } else {
+      res.json(participants);
+    }
+  } catch (error) {
+    res.status(500).json({ message: 
+      `Error fetching participants for event with id: ${eventId}: ${error}` });
+  }
+});
+
+app.delete('/participants/:eventId', async (req, res) => {
+  const { eventId } = req.params;
+  try { 
+    const participants = await Participant.deleteMany({ eventId });
+    if (!participants) {
+      res.status(404).json({ message: `Event not found for id: ${eventId}` });
+    } else {
+      res.json({ message: 
+        `Successfully removed all participants for event with id: ${eventId}` }
+      );
+    }
+  } catch (error) {
+    res.status(500).json({ message: 
+      `Error removing participants for event with id: ${eventId}: ${error}` });
+  }
+});
+
 app.listen(port);
