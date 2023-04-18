@@ -3,9 +3,7 @@ module.exports = {
   root: true,
   'extends': [
     'plugin:vue/vue3-essential',
-    'airbnb',
-    'plugin:prettier/recommended',
-    'prettier',
+    'eslint:recommended',
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
@@ -21,10 +19,5 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
-  },
-  rules: {
-    "max-len": ["error", { "code": 80 }],
-    "no-whitespace-before-property": "error",
-    "indent": ["error", 2]
-  },
+  }
 }

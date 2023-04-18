@@ -1,3 +1,4 @@
+/* eslint-env node */
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -69,7 +70,6 @@ app.post('/events', async (req, res) => {
   }
 });
 
-// Get all events
 app.get('/api/events', async (req, res) => {
   try {
     const events = await Event.find();

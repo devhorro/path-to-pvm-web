@@ -1,7 +1,10 @@
 <!-- ParticipantsList.vue -->
 <template>
   <div>
-    <button @click="showParticipants = !showParticipants" class="px-4 py-2 bg-blue-500 text-white rounded shadow">
+    <button
+      @click="showParticipants = !showParticipants"
+      class="px-4 py-2 bg-blue-500 text-white rounded shadow"
+    >
       {{ showParticipants ? 'Hide Participants' : 'Show Participants' }}
     </button>
 
@@ -20,7 +23,8 @@
             <tr v-for="(participant, index) in participants" :key="index">
               <td class="border px-4 py-2">{{ index + 1 }}</td>
               <td class="border px-4 py-2">{{ participant.username }}</td>
-              <td class="border px-4 py-2">{{ Math.round(participant.ehb) }}
+              <td class="border px-4 py-2">
+                {{ Math.round(participant.ehb) }}
               </td>
             </tr>
           </tbody>
@@ -30,7 +34,7 @@
     </div>
   </div>
 </template>
-  
+
 <script lang="ts">
 import { defineComponent, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
@@ -63,8 +67,9 @@ export default defineComponent({
           `${serverHostUrl}/participants/${props.eventId}`
         );
         participants.value = response.data.sort(
-          (a: { ehb: string; }, b: { ehb: string; }) => 
-            parseInt(b.ehb, 2) - parseInt(a.ehb, 2));
+          (a: { ehb: string }, b: { ehb: string }) =>
+            parseInt(b.ehb, 2) - parseInt(a.ehb, 2)
+        );
         console.log(participants.value);
       } catch (error) {
         errorMessage.value = 'Error fetching participants for event.';
@@ -76,16 +81,18 @@ export default defineComponent({
       if (props.eventId) getParticipants();
     });
 
-    watch(() => props.eventId, () => {
-      if (!props.eventId) getParticipants();
-    });
+    watch(
+      () => props.eventId,
+      () => {
+        if (!props.eventId) getParticipants();
+      }
+    );
 
     return {
       participants,
       showParticipants,
-      errorMessage
+      errorMessage,
     };
   },
 });
 </script>
-  
